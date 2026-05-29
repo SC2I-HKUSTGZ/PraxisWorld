@@ -1,0 +1,86 @@
+{
+  "collapse-filter": true,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "tag:#praxis/introduction",
+      "color": {
+        "a": 1,
+        "rgb": 5017087
+      }
+    },
+    {
+      "query": "tag:#praxis/evolution",
+      "color": {
+        "a": 1,
+        "rgb": 2275494
+      }
+    },
+    {
+      "query": "tag:#praxis/formulation",
+      "color": {
+        "a": 1,
+        "rgb": 15903035
+      }
+    },
+    {
+      "query": "tag:#praxis/pipeline",
+      "color": {
+        "a": 1,
+        "rgb": 14701211
+      }
+    },
+    {
+      "query": "tag:#praxis/current_methods",
+      "color": {
+        "a": 1,
+        "rgb": 9133302
+      }
+    },
+    {
+      "query": "tag:#praxis/open_problems",
+      "color": {
+        "a": 1,
+        "rgb": 15686491
+      }
+    },
+    {
+      "query": "tag:#praxis/conclusion",
+      "color": {
+        "a": 1,
+        "rgb": 8095636
+      }
+    },
+    {
+      "query": "tag:#moc",
+      "color": {
+        "a": 1,
+        "rgb": 16777215
+      }
+    },
+    {
+      "query": "tag:#section",
+      "color": {
+        "a": 1,
+        "rgb": 16765286
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1.1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.42,
+  "repelStrength": 11,
+  "linkStrength": 1,
+  "linkDistance": 90,
+  "scale": 0.7,
+  "close": false
+}
