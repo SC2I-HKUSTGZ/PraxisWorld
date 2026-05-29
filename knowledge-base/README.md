@@ -13,6 +13,7 @@ commit `12cd90c`. **181 references** cited across **7 sections / 22 subsections*
 | Path | What it is |
 |------|------------|
 | `index.html`, `app.js`, `style.css` | Self-contained interactive visualization (D3 v7, vendored in `lib/`). No build step. |
+| `embed.html` | Header-light variant of the visualization, embedded as the **Reference Map** section of the project page (`../index.html`) via an `<iframe>`. Detects iframe context and requires Ctrl/⌘+scroll to zoom so the page scrolls normally. |
 | `graph-data.json` | The knowledge graph (nodes, links, tree, full reference metadata + BibTeX), generated from the survey source. |
 | `vault/` | A real **Obsidian vault**: open this folder in Obsidian to browse the same structure as an organic graph with backlinks. |
 | `lib/d3.v7.min.js` | Vendored D3 (offline-safe). |
@@ -22,11 +23,15 @@ commit `12cd90c`. **181 references** cited across **7 sections / 22 subsections*
 - **Graph view** — Obsidian-style force graph. The survey is the hub; the seven
   sections fan out into their subsections and cited works, colored by section.
   References cited in several sections become visible *bridges*.
-- **Tree view** — the survey's narrative tree (section → subsection → reference),
-  collapsible.
+- **Tree view** — the survey's narrative tree (section → subsection → reference)
+  as a collapsible indented outline (one node per row; carets expand/collapse).
 - Hover to highlight a reference's neighborhood; click any node for a detail
   panel (authors, venue, year, every place it is cited, and copyable BibTeX).
 - Search by title / author / key / venue; filter by section via the legend.
+
+The same visualization appears in two places: embedded as the **Reference Map**
+section of the project page (`embed.html`), and as a full-screen standalone
+(`index.html`).
 
 ### The Obsidian vault (`vault/`)
 
