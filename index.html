@@ -59,8 +59,11 @@
     </header>
 
     <main>
-        <section class="media-panel" aria-label="PraxisWorld teaser">
-            <img src="assets/figures/fig1_teaser.png" alt="Same action verb producing different object-state transitions in robot manipulation">
+        <section class="section overview-section" id="overview">
+            <h2>Overview</h2>
+            <figure class="figure-wrap overview-figure">
+                <img src="assets/figures/overview.png" alt="PraxisWorld overview diagram">
+            </figure>
             <nav class="chapters" aria-label="Page sections">
                 <button class="selected" data-section="overview">Overview</button>
                 <button data-section="framework">Framework</button>
@@ -69,13 +72,6 @@
                 <button data-section="probe">Probe</button>
                 <button data-section="citation">Citation</button>
             </nav>
-        </section>
-
-        <section class="section" id="overview">
-            <h2>Overview</h2>
-            <figure class="figure-wrap">
-                <img src="assets/figures/overview.png" alt="PraxisWorld overview diagram">
-            </figure>
             <p>
                 PraxisWorld treats manipulation as a <strong>world state -> action interface -> state transition</strong> problem.
                 Instead of reading verbs such as pick, place, and insert as complete skill definitions, it asks which objects,
@@ -95,6 +91,14 @@
                     <span>object-centric skill descriptor for callable, verifiable manipulation interfaces</span>
                 </div>
             </div>
+        </section>
+
+        <section class="section motivation">
+            <h2>Motivation</h2>
+            <figure class="figure-wrap teaser-figure">
+                <img src="assets/figures/fig1_teaser.png" alt="Same action verb producing different object-state transitions in robot manipulation">
+                <figcaption>Same verb, different physics: PraxisWorld uses object-state transitions rather than action labels alone as the unit of analysis.</figcaption>
+            </figure>
         </section>
 
         <section class="section" id="framework">

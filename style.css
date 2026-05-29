@@ -140,28 +140,14 @@ sup {
     flex: 0 0 auto;
 }
 
-.media-panel {
-    margin-bottom: 30px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: var(--panel);
-}
-
-.media-panel img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 2481 / 697;
-    object-fit: contain;
-    background: #fff;
-}
-
 .chapters {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
-    padding: 20px 30px 30px;
+    max-width: 1040px;
+    margin: -4px auto 28px;
+    padding: 0;
 }
 
 .chapters button {
@@ -199,6 +185,19 @@ sup {
     border: 1px solid var(--line);
     border-radius: 18px;
     background: var(--panel);
+}
+
+.overview-section {
+    padding-top: 34px;
+}
+
+.overview-figure {
+    margin-bottom: 18px;
+}
+
+.teaser-figure img {
+    aspect-ratio: 2481 / 697;
+    object-fit: contain;
 }
 
 .section p {
