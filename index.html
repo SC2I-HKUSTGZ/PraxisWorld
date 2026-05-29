@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PraxisWorld</title>
+    <meta name="description" content="PraxisWorld: Object-Centric World-Action Model for Composable Robot Manipulation">
+    <meta property="og:title" content="PraxisWorld">
+    <meta property="og:description" content="An object-centric world-action model survey for composable, verifiable, and recoverable robot manipulation.">
+    <meta property="og:image" content="assets/figures/fig1_teaser.png">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231a73e8'/%3E%3Cpath d='M14 18h20c9 0 16 6 16 14s-7 14-16 14H22V34h12c2 0 4-1 4-3s-2-4-4-4H14z' fill='white'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <p class="eyebrow">Framework Survey</p>
+        <h1>PraxisWorld: Object-Centric World-Action Model<br>for Composable Robot Manipulation</h1>
+
+        <div class="authors">
+            <span>Yu-song Huang<sup>1,*</sup></span>
+            <span>Yu-yan Li<sup>1</sup></span>
+            <span>Hao-tian Wang<sup>1</sup></span>
+            <span>Xiao-yun Qiu<sup>1</sup></span>
+            <span>Hong-liang Lu<sup>1</sup></span>
+            <span>Wen-peng Xu<sup>1</sup></span>
+            <span>Yang-gang Sheng<sup>1</sup></span>
+            <span>Zhao-nian Kuang<sup>1</sup></span>
+            <span>Yi-jie Chen<sup>1</sup></span>
+            <span>Jin-tao He<sup>1</sup></span>
+            <span>Dong-ling Liu<sup>1</sup></span>
+            <span>Xin-hu Zheng<sup>1,*</sup></span>
+        </div>
+        <div class="affiliations">
+            <sup>1</sup>Intelligent Transportation Thrust, Systems Hub, and Center of Seamless Connectivity &amp; Connected Intelligence,
+            Hong Kong University of Science and Technology (Guangzhou), Guangzhou 511453, China
+            <br>
+            <sup>*</sup>Corresponding authors:
+            <a href="mailto:yhuang411@connect.hkust-gz.edu.cn">yhuang411@connect.hkust-gz.edu.cn</a>,
+            <a href="mailto:xinhuzheng@hkust-gz.edu.cn">xinhuzheng@hkust-gz.edu.cn</a>
+        </div>
+
+        <div class="links">
+            <a href="assets/paper/praxisworld.pdf" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 2.8L17.2 8H14zM6 20V4h6v6h6v10zm2-7h8v2H8zm0 4h8v2H8z"/></svg>
+                Paper
+            </a>
+            <a href="https://github.com/SC2I-HKUSTGZ/PraxisWorld" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.79-.26.79-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.77.42-1.3.76-1.6-2.67-.31-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 5.8c1.02 0 2.05.14 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.7.8.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                Source
+            </a>
+            <a href="#citation">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 2-2zm0 13 5-2.14L17 17V6H7z"/></svg>
+                BibTeX
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="media-panel" aria-label="PraxisWorld teaser">
+            <img src="assets/figures/fig1_teaser.png" alt="Same action verb producing different object-state transitions in robot manipulation">
+            <nav class="chapters" aria-label="Page sections">
+                <button class="selected" data-section="overview">Overview</button>
+                <button data-section="framework">Framework</button>
+                <button data-section="lifecycle">Lifecycle</button>
+                <button data-section="methods">Methods</button>
+                <button data-section="probe">Probe</button>
+                <button data-section="citation">Citation</button>
+            </nav>
+        </section>
+
+        <section class="section" id="overview">
+            <h2>Overview</h2>
+            <figure class="figure-wrap">
+                <img src="assets/figures/overview.png" alt="PraxisWorld overview diagram">
+            </figure>
+            <p>
+                PraxisWorld treats manipulation as a <strong>world state -> action interface -> state transition</strong> problem.
+                Instead of reading verbs such as pick, place, and insert as complete skill definitions, it asks which objects,
+                contact modes, tolerances, initiation conditions, effects, and recovery checks make a physical transition executable.
+            </p>
+            <div class="summary-grid">
+                <div>
+                    <strong>280+</strong>
+                    <span>papers reviewed across skills, TAMP, affordances, VLAs, tactile manipulation, and world models</span>
+                </div>
+                <div>
+                    <strong>4</strong>
+                    <span>lifecycle stages: definition, learning, composition, and execution with recovery</span>
+                </div>
+                <div>
+                    <strong>K</strong>
+                    <span>object-centric skill descriptor for callable, verifiable manipulation interfaces</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="framework">
+            <h2>Framework</h2>
+            <p>
+                The survey formalizes an atomic skill as
+                <strong>K=(R, S, X, C, I, pi, beta, Delta, E)</strong>, connecting object anchors,
+                world state, embodiment, contact constraints, initiation, policy, termination, predicted effect,
+                and verification signals.
+            </p>
+            <figure class="figure-wrap">
+                <img src="assets/figures/fig3_descriptor.png" alt="Atomic skill descriptor interface">
+                <figcaption>The atomic-skill interface makes object state and transition effects explicit.</figcaption>
+            </figure>
+            <figure class="figure-wrap compact">
+                <img src="assets/figures/fig4_state_transition.png" alt="World-state transition under skill execution">
+                <figcaption>Skills are evaluated by the object-state transition they produce, not by the verb alone.</figcaption>
+            </figure>
+        </section>
+
+        <section class="section" id="lifecycle">
+            <h2>Lifecycle</h2>
+            <figure class="figure-wrap">
+                <img src="assets/figures/fig4_four_pilots.png" alt="Four stages of the object-centric world-action model">
+            </figure>
+            <div class="stage-grid">
+                <div><strong>Definition and Discovery</strong><span>Identify reusable object-state transitions.</span></div>
+                <div><strong>Learning and Anchoring</strong><span>Ground skills in semantic, metric, and tactile state.</span></div>
+                <div><strong>Composition and Orchestration</strong><span>Match effects to initiation conditions.</span></div>
+                <div><strong>Execution and Recovery</strong><span>Verify transitions and repair boundary failures.</span></div>
+            </div>
+            <figure class="figure-wrap">
+                <img src="assets/figures/fig5_composition_pipeline.png" alt="Composition as effect-to-initiation matching">
+                <figcaption>Composition becomes state-transition matching: Delta_i must satisfy I_j.</figcaption>
+            </figure>
+            <figure class="figure-wrap">
+                <img src="assets/figures/fig6_composition_families.png" alt="Seven composition families for atomic skills">
+            </figure>
+        </section>
+
+        <section class="section" id="methods">
+            <h2>Current Methods</h2>
+            <p>
+                PraxisWorld rereads current systems by asking what part of the world-action loop they expose:
+                observed object state, transition prediction, callable interface, verification, or recovery.
+                JEPA-style and action-conditioned world models are analyzed as transition-interface estimators.
+            </p>
+            <figure class="figure-wrap">
+                <img src="assets/figures/fig8_world_models.png" alt="World models as transition-interface estimators">
+            </figure>
+            <figure class="figure-wrap compact">
+                <img src="assets/figures/fig5_world_model.png" alt="World-action model role in skill interfaces">
+            </figure>
+        </section>
+
+        <section class="section" id="probe">
+            <h2>Meta-World Probe</h2>
+            <p>
+                The manuscript includes a compact Meta-World V3 diagnostic over basketball, bin-picking, and shelf-place.
+                The probe checks whether an explicit object-state gate can detect perturbed skill-boundary transitions
+                and support recovery.
+            </p>
+            <div class="probe-grid">
+                <figure class="figure-wrap">
+                    <img src="assets/figures/metaworld_probe_success_rates.png" alt="Meta-World probe success rates">
+                </figure>
+                <figure class="figure-wrap">
+                    <img src="assets/figures/metaworld_probe_rollout_grid.png" alt="Meta-World probe rollout examples">
+                </figure>
+            </div>
+        </section>
+
+        <section class="section citation" id="citation">
+            <h2>Citation</h2>
+            <button class="copy-button" type="button" data-copy-target="bibtex">Copy BibTeX</button>
+            <pre id="bibtex">@misc{huang2026praxisworld,
+  title={PraxisWorld: Object-Centric World-Action Model for Composable Robot Manipulation},
+  author={Huang, Yu-song and Li, Yu-yan and Wang, Hao-tian and Qiu, Xiao-yun and Lu, Hong-liang and Xu, Wen-peng and Sheng, Yang-gang and Kuang, Zhao-nian and Chen, Yi-jie and He, Jin-tao and Liu, Dong-ling and Zheng, Xin-hu},
+  year={2026},
+  note={Survey manuscript}
+}</pre>
+        </section>
+    </main>
+
+    <footer>
+        <span>PraxisWorld</span>
+        <span>Latest Overleaf sync verified: May 29, 2026</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
