@@ -9,6 +9,7 @@
   const panel = document.getElementById("panel");
   const pBody = document.getElementById("p-body");
   const pTag = document.getElementById("p-tag");
+  const EMBEDDED = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
 
   let DATA, NODES, LINKS, NEIGH = new Map();
   let sim, zoom, viewport, gGraph, gTree, gLink, gNode, gLabel;
@@ -50,17 +51,18 @@
       NEIGH.get(l.target.id).add(l.source.id);
     });
 
-    document.getElementById("stat-refs").textContent = data.meta.n_references_cited;
-    document.getElementById("stat-secs").textContent = data.meta.n_sections;
-    document.getElementById("stat-links").textContent =
-      LINKS.filter((l) => l.type === "cite").length;
+    // Stat chips are optional (the embedded view omits them).
+    const setStat = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+    setStat("stat-refs", data.meta.n_references_cited);
+    setStat("stat-secs", data.meta.n_sections);
+    setStat("stat-links", LINKS.filter((l) => l.type === "cite").length);
 
     buildLegend();
     setupSvg();
     buildGraph();
     buildTree();
     showGraph();
-    document.getElementById("loading").style.display = "none";
+    const ld = document.getElementById("loading"); if (ld) ld.style.display = "none";
 
     // controls
     document.getElementById("view-graph").onclick = () => switchMode("graph");
@@ -101,12 +103,19 @@
     gNode = gGraph.append("g").attr("class", "nodes");
     gLabel = gGraph.append("g").attr("class", "labels");
 
-    zoom = d3.zoom().scaleExtent([0.2, 4]).on("zoom", (e) => {
-      viewport.attr("transform", e.transform);
-      curScale = e.transform.k;
-      updateLabels();
-    });
-    svg.call(zoom);
+    zoom = d3.zoom().scaleExtent([0.2, 4])
+      .filter((e) => {
+        // Embedded in the project page: let normal wheel scroll the page; require
+        // Ctrl/Cmd to zoom. Standalone: wheel zooms directly.
+        if (e.type === "wheel") return EMBEDDED ? (e.ctrlKey || e.metaKey) : true;
+        return !e.button;
+      })
+      .on("zoom", (e) => {
+        viewport.attr("transform", e.transform);
+        curScale = e.transform.k;
+        updateLabels();
+      });
+    svg.call(zoom).on("dblclick.zoom", null);
 
     // Fit once the element actually has a non-zero size (handles late layout /
     // headless preview sizing), and re-fit on genuine size changes.
@@ -154,11 +163,9 @@
     applyFit(minX, minY, maxX, maxY, dur, 1.3);
   }
   function fitTree(dur) {
-    // Horizontal tree: anchor near the left, vertically centered on the root,
-    // at a fixed comfortable scale. The user pans to explore large expansions.
+    // Indented outline tree: anchor near the top-left at 1:1; user pans to scroll.
     if (!troot || !W || !H) return;
-    const s = 0.95;
-    const t = d3.zoomIdentity.translate(120, H / 2 - (troot.x || 0) * s).scale(s);
+    const t = d3.zoomIdentity.translate(52, 38).scale(1);
     (dur ? svg.transition().duration(dur) : svg).call(zoom.transform, t);
   }
 
@@ -381,13 +388,17 @@
   }
   function showGraph() {
     gTree.style("display", "none"); gGraph.style("display", null);
-    document.getElementById("hint").textContent = "Drag to pan · scroll to zoom · click a node for details";
+    const h = document.getElementById("hint");
+    if (h) h.textContent = EMBEDDED
+      ? "Drag to pan · Ctrl/⌘+scroll to zoom · click a node for details"
+      : "Drag to pan · scroll to zoom · click a node for details";
     resetView();
     applyHighlight();
   }
   function showTree() {
     gGraph.style("display", "none"); gTree.style("display", null);
-    document.getElementById("hint").textContent = "Click a section to expand · click a leaf for details";
+    const h = document.getElementById("hint");
+    if (h) h.textContent = "Click a row to expand · drag to pan · click a reference for details";
     renderTree();
     resetView();
   }
@@ -400,41 +411,66 @@
       if (d.depth >= 1 && d.children) { d._children = d.children; d.children = null; }
     });
   }
+  const ROW_H = 24, INDENT = 22;
   function renderTree() {
     gTree.selectAll("*").remove();
     // auto-expand to search matches
     if (searchSet) expandForSearch(troot);
-    const layout = d3.tree().nodeSize([16, 230]);
-    layout(troot);
-    const nodes = troot.descendants();
-    const links = troot.links();
 
-    gTree.append("g").attr("class", "tlinks").selectAll("path").data(links).join("path")
-      .attr("class", "tlink")
-      .attr("d", d3.linkHorizontal().x((d) => d.y).y((d) => d.x));
+    // Visible rows via depth-first walk (only currently-expanded children).
+    const rows = [];
+    (function walk(d) { rows.push(d); (d.children || []).forEach(walk); })(troot);
+    rows.forEach((d, i) => { d.rx = d.depth * INDENT; d.ry = i * ROW_H; });
 
-    const tn = gTree.append("g").attr("class", "tnodes").selectAll("g").data(nodes).join("g")
-      .attr("class", (d) => "tnode" + ((d._children) ? " collapsed" : ""))
-      .attr("transform", (d) => `translate(${d.y},${d.x})`)
+    const dimmed = (d) => searchSet && d.data.type === "reference" && !searchSet.has("ref:" + d.data.key);
+    const dotColor = (d) => d.data.type === "root" ? ROOT_COLOR : (DATA.section_colors[d.data.section] ?? "#7B8794");
+    const hasKids = (d) => !!(d.children || d._children);
+
+    // Elbow connectors: a vertical guide under each expanded parent + a stub to each child.
+    const lg = gTree.append("g").attr("class", "tlinks");
+    rows.forEach((p) => {
+      if (!p.children || !p.children.length) return;
+      const vx = p.rx + 5;
+      p.children.forEach((c) => {
+        lg.append("path").attr("class", "tguide").attr("d", `M${vx},${p.ry + 9} V${c.ry} H${c.rx + 1}`);
+      });
+    });
+
+    const tn = gTree.append("g").attr("class", "tnodes")
+      .selectAll("g.trow").data(rows).join("g")
+      .attr("class", (d) => "trow t-" + d.data.type)
+      .attr("transform", (d) => `translate(${d.rx},${d.ry})`)
       .on("click", (e, d) => {
         e.stopPropagation();
-        const nd = d.data;
-        if (nd.type === "reference") { const n = NODES.find((x) => x.id === "ref:" + nd.key); if (n) selectNode(n); return; }
+        if (d.data.type === "reference") {
+          const n = NODES.find((x) => x.id === "ref:" + d.data.key); if (n) selectNode(n); return;
+        }
         if (d.children) { d._children = d.children; d.children = null; }
         else if (d._children) { d.children = d._children; d._children = null; }
         renderTree();
       });
-    tn.append("circle").attr("r", (d) =>
-      d.data.type === "root" ? 6 : d.data.type === "section" ? 5.5 : d.data.type === "subsection" ? 4.5 : 3.4)
-      .attr("fill", (d) => d.data.type === "root" ? ROOT_COLOR : (DATA.section_colors[d.data.section] ?? "#7B8794"))
-      .attr("opacity", (d) => (searchSet && d.data.type === "reference" && !searchSet.has("ref:" + d.data.key)) ? 0.25 : 1);
-    tn.append("text")
-      .attr("dy", "0.32em")
-      .attr("x", (d) => (d.children || d._children) ? -8 : 8)
-      .attr("text-anchor", (d) => (d.children || d._children) ? "end" : "start")
-      .style("font-weight", (d) => d.data.type === "section" ? 600 : d.data.type === "root" ? 700 : 400)
-      .style("opacity", (d) => (searchSet && d.data.type === "reference" && !searchSet.has("ref:" + d.data.key)) ? 0.3 : 1)
-      .text((d) => d.data.name + ((d._children) ? "  (" + count(d._children) + ")" : ""));
+
+    // Full-row hover/click hit area.
+    tn.append("rect").attr("class", "trow-hit")
+      .attr("x", -8).attr("y", -ROW_H / 2 + 1).attr("width", 380).attr("height", ROW_H - 2).attr("rx", 5);
+
+    // Expand/collapse caret for internal nodes.
+    tn.filter(hasKids).append("text").attr("class", "caret")
+      .attr("x", -11).attr("dy", "0.32em").text((d) => d.children ? "▾" : "▸");
+
+    // Colored section dot.
+    tn.append("circle")
+      .attr("cx", 5).attr("cy", 0)
+      .attr("r", (d) => d.data.type === "root" ? 5 : d.data.type === "section" ? 4.6 : d.data.type === "subsection" ? 4 : 3.2)
+      .attr("fill", dotColor)
+      .attr("opacity", (d) => dimmed(d) ? 0.3 : 1);
+
+    // Label.
+    tn.append("text").attr("class", "tlabel")
+      .attr("x", 15).attr("dy", "0.32em")
+      .style("font-weight", (d) => d.data.type === "root" ? 700 : d.data.type === "section" ? 600 : d.data.type === "subsection" ? 500 : 400)
+      .style("opacity", (d) => dimmed(d) ? 0.4 : 1)
+      .text((d) => d.data.name + (d._children ? `  (${count(d._children)})` : ""));
   }
   function count(stash) {
     // total reference leaves under a stashed (collapsed) subtree

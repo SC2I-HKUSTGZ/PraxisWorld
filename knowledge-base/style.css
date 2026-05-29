@@ -112,7 +112,8 @@ header .brand h1 .sub { color: var(--muted); font-weight: 400; }
     height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 9px;
     background: #fff; color: var(--text); font: inherit; font-size: 0.82rem; cursor: pointer;
 }
-.tool-btn:hover { background: var(--panel); }
+.tool-btn:hover { background: var(--panel); text-decoration: none; }
+a.tool-btn { display: inline-flex; align-items: center; color: var(--text); line-height: 38px; }
 
 /* ---------- stage ---------- */
 .stage { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; }
@@ -152,11 +153,18 @@ header .brand h1 .sub { color: var(--muted); font-weight: 400; }
 .label.subsection { font-size: 10.5px; font-weight: 500; fill: var(--muted); }
 .label.reference { font-size: 9.5px; fill: var(--text); }
 
-/* tree links/nodes */
-.tlink { fill: none; stroke: #c8d0dc; stroke-opacity: 0.8; }
-.tnode circle { stroke: #fff; stroke-width: 1.5px; cursor: pointer; }
-.tnode text { font-size: 11px; fill: var(--ink); cursor: pointer; }
-.tnode.collapsed circle { stroke: #202124; stroke-width: 2px; }
+/* indented outline tree */
+.tguide { fill: none; stroke: #c8d2e0; stroke-width: 1.3px; }
+.trow { cursor: pointer; }
+.trow-hit { fill: transparent; }
+.trow:hover .trow-hit { fill: rgba(26, 115, 232, 0.07); }
+.trow circle { stroke: #fff; stroke-width: 1.2px; }
+.caret { fill: var(--muted); font-size: 10px; }
+.tlabel { fill: var(--ink); font-size: 12.5px; font-family: 'Google Sans', Arial, sans-serif; }
+.trow:hover .tlabel { fill: var(--blue); }
+.t-root .tlabel { font-size: 14px; }
+.t-reference .tlabel { fill: var(--text); font-size: 11.5px; }
+.t-reference:hover .tlabel { fill: var(--blue); }
 
 /* ---------- detail panel ---------- */
 #panel {

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PraxisWorld Reference Map — embed</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="embed">
+    <div class="toolbar">
+        <div class="seg" role="tablist" aria-label="View mode">
+            <button id="view-graph" class="active" type="button">Graph</button>
+            <button id="view-tree" type="button">Tree</button>
+        </div>
+        <label class="search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="search" type="search" placeholder="Search title, author, key…" autocomplete="off">
+        </label>
+        <button id="reset" class="tool-btn" type="button">Reset</button>
+        <a class="tool-btn open-full" href="index.html" target="_blank" rel="noopener">Open full ↗</a>
+        <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="stage">
+        <svg id="viz" role="img" aria-label="Reference knowledge graph"></svg>
+        <div class="hint" id="hint">Drag to pan · click a node for details</div>
+        <div class="loading" id="loading">Loading reference map…</div>
+
+        <aside id="panel" aria-live="polite">
+            <div class="phead">
+                <span class="ptag" id="p-tag">Reference</span>
+                <button class="pclose" id="p-close" aria-label="Close panel">×</button>
+            </div>
+            <div class="pbody" id="p-body"></div>
+        </aside>
+    </div>
+
+    <script src="lib/d3.v7.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
