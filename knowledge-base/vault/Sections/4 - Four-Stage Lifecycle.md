@@ -127,6 +127,7 @@ Part of [[PraxisWorld]].
 - [[Vats2024RecoveryChainingLL|Shivam Vats et al. 2025 — RecoveryChaining: Learning Local Recovery Policies for Robust Manipulation]]
 - [[luo2024hilserl|Jianlan Luo et al. 2025 — Precise and Dexterous Robotic Manipulation via Human-in-the-Loop Reinforcement Learning]]
 - [[robocopilot2025|Philipp Wu et al. 2025 — RoboCopilot: Human-in-the-loop Interactive Imitation Learning for Robot Manipulation]]
+- [[li2026hiwm|Yaxuan Li et al. 2026 — Hi-WM: Human-in-the-World-Model for Scalable Robot Post-Training]]
 - [[dppo2025|Allen Z. Ren et al. 2025 — Diffusion Policy Policy Optimization]]
 - [[simplevlarl2026|Haozhan Li et al. 2026 — SimpleVLA-RL: Scaling VLA Training via Reinforcement Learning]]
 - [[starevla2025|Feng Xu et al. 2025 — STARE-VLA: Progressive Stage-Aware Reinforcement for Fine-Tuning Vision-Language-Action Models]]

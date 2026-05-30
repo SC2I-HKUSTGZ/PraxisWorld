@@ -337,7 +337,7 @@
       pTag.textContent = "Survey";
       pBody.innerHTML = `<h2 class="ptitle">${esc(DATA.meta.title)}</h2>
         <div class="authors-full">${esc(DATA.meta.subtitle)}</div>
-        <div class="meta-row"><b>${DATA.meta.n_references_cited}</b> references · <b>${DATA.meta.n_sections}</b> sections · ${DATA.meta.n_bib_entries} bib entries</div>
+        <div class="meta-row"><b>${DATA.meta.n_references_cited}</b> references · <b>${DATA.meta.n_sections}</b> sections</div>
         <h3>Sections</h3><div class="sublist">` +
         DATA.section_short.slice(0, DATA.meta.n_sections).map((s, i) =>
           `<div style="border-color:${DATA.section_colors[i]}">${i + 1}. ${esc(s)}</div>`).join("") +

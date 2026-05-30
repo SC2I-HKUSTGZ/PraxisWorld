@@ -47,4 +47,6 @@ Part of [[PraxisWorld]].
 - [[vjepa2_2025|Mido Assran et al. 2025 — V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning]]
 - [[leworldmodel2026|Lucas Maes et al. 2026 — LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels]]
 - [[vla_jepa2026|Jingwen Sun et al. 2026 — VLA-JEPA: Enhancing Vision-Language-Action Model with Latent World Model]]
+- [[wang2026wamsurvey|Siyin Wang & others 2026 — World Action Models: The Next Frontier in Embodied AI]]
+- [[zhang2025wmsurvey|Peng-Fei Zhang et al. 2025 — A Step Toward World Models: A Survey on Robotic Manipulation]]
 

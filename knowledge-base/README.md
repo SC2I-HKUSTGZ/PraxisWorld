@@ -5,8 +5,9 @@ Interactive, section-organized map of every reference cited in the
 
 Generated from the latest Overleaf snapshot
 (`SC2I-HKUSTGZ/PraxisWorld` ← `git.overleaf.com/6a1822a2f4b5b567cc34d901`),
-commit `12cd90c`. **181 references** cited across **7 sections / 22 subsections**
-(188 total bib entries).
+commit `d6b7ab0`. **191 references** cited across **7 sections / 22 subsections**.
+Only works actually cited in the survey are shown — uncited `.bib` entries are
+excluded from both the vault and the graph.
 
 ## What's here
 
