@@ -55,6 +55,10 @@
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.79-.26.79-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49.99.11-.77.42-1.3.76-1.6-2.67-.31-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 5.8c1.02 0 2.05.14 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.7.8.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
                 Source
             </a>
+            <a href="#demos">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                Demos
+            </a>
             <a href="#citation">
                 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 2-2zm0 13 5-2.14L17 17V6H7z"/></svg>
                 BibTeX
@@ -177,6 +181,49 @@
                 <figure class="figure-wrap">
                     <img src="assets/figures/metaworld_probe_rollout_grid.png" alt="Meta-World probe rollout examples">
                     <figcaption>Example rollout: when the object is displaced at the skill boundary, continuing the old action suffix fails, but the same expert policy recovers once the mismatch is detected and control is re-queried in closed loop.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section" id="demos">
+            <h2>Simulation Demos</h2>
+            <p>
+                In collaboration with <strong>Standard Robots</strong>, we instantiate PraxisWorld's
+                execution-and-recovery loop on an industrial dual-arm mobile manipulator with dexterous
+                hands in <strong>NVIDIA Isaac Sim</strong>. The flagship warehouse demo makes the framework's
+                core claims visible: an object-state anomaly is <em>observed</em> (a tipped carton arriving from
+                upstream), the task is checkpointed, a recovery skill re-enters from the observed state, the
+                effect is verified, and execution resumes &mdash; followed by an effect-to-initiation re-plan
+                (&Delta; &#8872; I) when a fragile blocker occupies the next placement slot, and
+                material-conditioned grasps (cardboard clamp vs. glassware cradle).
+            </p>
+            <figure class="figure-wrap">
+                <video controls preload="metadata" poster="assets/videos/warehouse_main_poster.jpg">
+                    <source src="assets/videos/warehouse_main.mp4" type="video/mp4">
+                </video>
+                <figcaption>Warehouse flagship: interrupt &rarr; observed-state recovery &rarr; verified resume, an
+                effect-to-initiation re-plan around a glass blocker, and material-adaptive grasping &mdash; with a
+                bilingual operations HUD narrating each state transition.</figcaption>
+            </figure>
+            <div class="probe-grid demo-grid">
+                <figure class="figure-wrap">
+                    <video controls preload="metadata" poster="assets/videos/factory_poster.jpg">
+                        <source src="assets/videos/factory.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Factory cell: a blocking object violates the place-skill's initiation condition;
+                    the robot re-orders sub-tasks and restores the scene.</figcaption>
+                </figure>
+                <figure class="figure-wrap">
+                    <video controls preload="metadata" poster="assets/videos/laboratory_poster.jpg">
+                        <source src="assets/videos/laboratory.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Laboratory: reagent-vessel handling with pose-verified pours and pipette use.</figcaption>
+                </figure>
+                <figure class="figure-wrap">
+                    <video controls preload="metadata" poster="assets/videos/office_poster.jpg">
+                        <source src="assets/videos/office.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Office service: desktop tidy-up and hand-over tasks in a human environment.</figcaption>
                 </figure>
             </div>
         </section>
