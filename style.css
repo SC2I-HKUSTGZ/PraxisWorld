@@ -440,10 +440,19 @@ footer {
     display: block;
     background: #0b0d11;
 }
+.demo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+.demo-grid .figure-wrap {
+    margin: 0;
+}
 .demo-grid .figure-wrap video {
     aspect-ratio: 16 / 9;
 }
-@media (max-width: 720px) {
+@media (max-width: 900px) {
     .demo-grid {
         grid-template-columns: 1fr;
     }
